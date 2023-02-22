@@ -1,10 +1,10 @@
 package com.example.weatherstationspring.external.storage;
 
+import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.OffsetDateTime;
-import java.time.ZonedDateTime;
 import java.util.Objects;
 
 @Entity
@@ -13,40 +13,42 @@ import java.util.Objects;
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(name = "measurements")
 public class MeasurementEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @NotNull
     Long id;
-    
-    @Column(name = "TIMESTAMP")
+
+    @Column(name = "timestamp", nullable = false)
     private OffsetDateTime timestamp;
 
-    @Column(name = "TEMPERATURE_C")
+    @Column(name = "temperature_c")
     private Float temperature;
 
-    @Column(name="PRESSURE_HPA")
+    @Column(name="pressure_hpa")
     private Float pressureHpa;
 
-    @Column(name="RELATIVEHUMIDITY_PERCENT")
+    @Column(name="relative_humidity_percent")
     private Float relativeHumidityInPercent;
 
 
-    @Column(name="PM1_UGPERM3")
+    @Column(name="pm1_ugper3")
     private Integer pm1Particles;
 
-    @Column(name="PM2dot5_UGPERM3")
+    @Column(name="pm2dot5_ugper3")
     private Integer pm25Particles;
 
-    @Column(name="PM10_UGPERM3")
+    @Column(name="pm10_ugper3")
     private Integer pm10Particles;
 
-    @Column(name="AIR_QUALITY")
+    @Column(name="air_quality")
     private String airQualityByPM;
 
-    @Column(name="GPS_LATITUDE")
+    @Column(name="gps_latitude")
     private Double gpsLatitude;
 
-    @Column(name="GPS_LONGTITUDE")
+    @Column(name="gps_longitude")
     private Double gpsLongitude;
 
     // KOORDYNATY DO GPS Z GOOGLA:
