@@ -32,7 +32,7 @@ public class MeasurementsService {
         return measurementsRepository.findAll(pageable);
     }
 
-    public Measurement measureValueAndRecordResult() {
+    public Measurement measureValuesAndRecordResult() {
         var actualValue = valuesMeasurement.measureValue();
         var savedMeasuredValue = measurementsRepository.save(actualValue);
         return savedMeasuredValue;

@@ -6,11 +6,11 @@ import com.example.weatherstationspring.domain.measurement.model.Measurement;
 import java.time.OffsetDateTime;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class FakeTemperatureMeasurementAdapter implements ValuesMeasurement {
+public class FakeMeasurementAdapter implements ValuesMeasurement {
     @Override
     public Measurement measureValue() {
         OffsetDateTime offsetDateTime = OffsetDateTime.now();
-        return new Measurement(55L, 10.0F, offsetDateTime, 10.0F,
+        return new Measurement(55L, offsetDateTime, 10.0F,
                 10.1F, 15.5F, 10, 11, 15,
                 "Good", 51.773, 19.77702);
     }

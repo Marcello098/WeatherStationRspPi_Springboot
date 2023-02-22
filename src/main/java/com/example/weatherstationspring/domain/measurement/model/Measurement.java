@@ -11,7 +11,6 @@ import java.time.OffsetDateTime;
 @ToString
 public class Measurement {
     Long id;
-    Float value;  
     OffsetDateTime timestamp;
 
     Float temperature;
@@ -25,6 +24,7 @@ public class Measurement {
 
     Double gpsLatitude;
     Double gpsLongitude;
+    //String googleMapsZoom;
 
     // KOORDYNATY DO GPS Z GOOGLA:
     // 51.7930425 - w tym formacie N

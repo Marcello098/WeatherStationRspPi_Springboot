@@ -1,12 +1,13 @@
 package com.example.weatherstationspring.external.storage;
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.time.OffsetDateTime;
 import java.util.List;
 
-public interface PagingAndSortingMeasurementsRepository extends PagingAndSortingRepository<MeasurementEntity, Long> {
+public interface JpaMeasurementsRepository extends JpaRepository<MeasurementEntity, Long> {
 
     List<MeasurementEntity> findAllByTimestampStartsWith(OffsetDateTime timestamp);
     List<MeasurementEntity> findAllByAirQualityByPM(String airQualityByPM, Pageable pageable);

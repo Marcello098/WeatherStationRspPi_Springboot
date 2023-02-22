@@ -20,7 +20,7 @@ public class MeasurementsScheduler {
 
     @Scheduled(fixedRate = 5000)
     public void reportCurrentTime() {
-        measurementsService.measureValueAndRecordResult();
+        measurementsService.measureValuesAndRecordResult();
         log.info("The time is now {}", dateFormat.format(new Date()));
     }
 }

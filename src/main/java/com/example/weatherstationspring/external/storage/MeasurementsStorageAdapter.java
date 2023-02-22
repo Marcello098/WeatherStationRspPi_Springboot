@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @Log
 public class MeasurementsStorageAdapter implements MeasurementsRepository {
 
-    private final PagingAndSortingMeasurementsRepository measurementsRepository;
+    private final JpaMeasurementsRepository measurementsRepository;
     private final MeasurementEntityMapper mapper;
 
     @Override

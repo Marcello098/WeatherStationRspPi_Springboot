@@ -23,4 +23,5 @@ public class MeasurementDTO {
 
     Double gpsLatitude;
     Double gpsLongitude;
+    //String googleMapsZoom;
 }

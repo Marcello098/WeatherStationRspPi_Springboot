@@ -5,7 +5,7 @@ import lombok.Value;
 import java.util.List;
 @Value
 public class PageMeasurementDTO {
-    List<MeasurementDTO> measures;
+    List<MeasurementDTO> measurements;
     Integer currentPage;
     Integer totalPages;
     Long totalElements;
