@@ -10,7 +10,9 @@ public interface GPSReader {
     void stopReading();
     public SerialPort getPortNameOfGPS();
 
-    String fetchData(SerialPort serialPort, BufferedReader br);
+    String fetchData(SerialPort serialPort, BufferedReader br, StringBuilder line);
+
+    public String fetchData2 (SerialPort serialPort);
 
     SerialPort prepareForFetchingData() throws InterruptedException;
 

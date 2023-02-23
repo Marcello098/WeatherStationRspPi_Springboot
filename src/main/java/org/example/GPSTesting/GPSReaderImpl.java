@@ -13,6 +13,7 @@ public class GPSReaderImpl implements GPSReader {
     final int DataBits = 8;
     final int StopBits = SerialPort.ONE_STOP_BIT;
     final int Parity   = SerialPort.NO_PARITY;
+    private boolean continueReading = true;
     String portName = "";
 
     String GNRMC = "";
@@ -34,8 +35,8 @@ $BDGSV,1,1,00*68
 $GNGLL,,,,,204525.086,V,N*6E
      */
 
-    private boolean continueReading = true;
-    
+    // GNRMC
+    // GNGGA
     @Override
     public SerialPort getPortNameOfGPS() {
         SerialPort[] ports = SerialPort.getCommPorts();
@@ -156,30 +157,32 @@ $GNGLL,,,,,204525.086,V,N*6E
     }
 
     @Override
-    public String fetchData(SerialPort serialPort, BufferedReader br) {
+    public String fetchData(SerialPort serialPort, BufferedReader br, StringBuilder line) {
         try {
-            StringBuilder line = new StringBuilder();
+           // StringBuilder line = new StringBuilder();
 
                 var bytesAvailable = serialPort.bytesAvailable();
-                //byte[] readBuffer = new byte[600];
                 if (bytesAvailable > 0) {
                     for (int i = 0; i < bytesAvailable; i++) {
                         byte b = (byte) br.read();
                         if (b < 32) {
                             // All non-string bytes are handled as line breaks
                             if (line.length() > 0) {
-                                //String S = new String(readBuffer, StandardCharsets.UTF_8);
-                                //System.out.println("Received -> "+ S);
-                                System.out.println("Line: " + line);
+                                //System.out.println("Line: " + line);
                                 //line = new StringBuilder();
                                 return line.toString();
-
-
                             }
-                        } else {
+
+                        }
+                        else
+                        {
                             line.append((char) b);
                         }
+
+
                     }
+                    //System.out.println(line);
+
                 }
 
         }catch (IOException e) {
@@ -189,16 +192,16 @@ $GNGLL,,,,,204525.086,V,N*6E
             System.out.println(Arrays.toString(e.getStackTrace()));
             serialPort.closePort();
         }
-        return "";
+        return "###";
     }
-
+    @Override
     public String fetchData2 (SerialPort serialPort) {
         byte[] readBuffer = new byte[400];
         int numRead = serialPort.readBytes(readBuffer,
                 readBuffer.length);
         System.out.print("Read " + numRead + " bytes - \n");
         //Convert bytes to String
-        String S = new String(readBuffer, StandardCharsets.UTF_8);
+        String S = new String(readBuffer, 15, 32, StandardCharsets.UTF_8);
         System.out.println(S);
         return S;
     }
@@ -252,7 +255,7 @@ $GNGLL,,,,,204525.086,V,N*6E
             while(continueReading) {
                 fetchData2(serialPort);
             }
-            if (fetchData(serialPort, br) == null) {
+            if (fetchData2(serialPort) == null) {
                 stopReading();
             }
         }

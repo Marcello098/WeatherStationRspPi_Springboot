@@ -9,7 +9,6 @@ public class GPSRunner {
         GPSParser gpsParser = new GPSParserImpl(0.0,0.0,"18");
         SerialPort serialPort = gpsReader.getPortNameOfGPS();
         gpsReader.getDataFromGPSNew(serialPort);
-
         String[] coordinates = gpsParser.extractCoordinatesFromLine(null);
         gpsParser.parseCoordinatesForGMaps(coordinates);
 

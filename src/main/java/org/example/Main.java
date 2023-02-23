@@ -8,6 +8,7 @@ import org.example.GPSTesting.GPSReaderImpl;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class Main {
 
@@ -18,18 +19,21 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
         var pi4j = Pi4J.newAutoContext();
-        // get a serial I/O provider from the Pi4J context
         GPSReader gpsReader = new GPSReaderImpl();
-        //SerialPort port  = gpsReader.getPortNameOfGPS();
-        //gpsReader.getDataFromGPSNew2(port);
+        // Implementation v1
         SerialPort port = gpsReader.prepareForFetchingData();
         if (port != null) {
             BufferedReader br = new BufferedReader(new InputStreamReader(port.getInputStream()));
+            StringBuilder line = new StringBuilder();
             while (true) {
-                System.out.println(gpsReader.fetchData(port, br).toString());
+                String fetchedData = gpsReader.fetchData(port, br, line);
+                System.out.println(fetchedData);
             }
-
         }
+
+        // Implementation v2
+       // SerialPort portNameOfGPS  = gpsReader.getPortNameOfGPS();
+        //gpsReader.getDataFromGPSNew(portNameOfGPS);
         //String[] coordstest = {"5147.4532", "N", "01924.7052", "W"};
         //GPSParserImpl gpsParserImpl = new GPSParserImpl(51.33, 19.33, "17z");
         //gpsParserImpl.parseCoordinatesForGMaps(coordstest);
