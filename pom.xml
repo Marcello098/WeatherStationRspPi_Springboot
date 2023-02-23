@@ -192,7 +192,7 @@
                             <archive>
                                 <manifest>
                                     <addDefaultImplementationEntries/>
-                                    <mainClass>com.example.weatherstationspring.WeatherStationSpringApplication</mainClass>
+                                    <mainClass>org.example.weatherstationspring.WeatherStationSpringApplication</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>
